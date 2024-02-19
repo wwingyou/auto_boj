@@ -1,0 +1,11 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+# 로드패스의 맨 앞에 /lib 디렉토리를 추가한다.
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+$template_dir = File.expand_path("../lib/template", __dir__)
+
+require "boj"
+require "thor"
+
+Boj::CLI.start(ARGV)
