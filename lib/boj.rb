@@ -3,8 +3,6 @@
 # stdlib
 require "fileutils"
 
-require "boj/domain"
-
 module Boj
   # internal requires
   autoload :CLI,                "boj/cli"
@@ -19,6 +17,7 @@ module Boj
   autoload :Testcase,           "boj/testcase"
   autoload :TestResult,         "boj/test_result"
   autoload :TestcaseIO,         "boj/testcase_io"
+  autoload :Helper,             "boj/helper"
 
   class << self
     def session
@@ -27,6 +26,10 @@ module Boj
 
     def config
       @config ||= Boj::Configuration.load
+    end
+    
+    def root_dir
+      Dir.pwd
     end
   end
 end
