@@ -23,9 +23,9 @@ module Boj
         file.puts tag
       end
     end
-    
-    #FIXME: 필요없는 코드가 될것 같다
-    def checkout(args={})
+
+    # FIXME: 필요없는 코드가 될것 같다
+    def checkout(args = {})
       language = args[:language] || @language
       tag = args[:tag] || @tag
 

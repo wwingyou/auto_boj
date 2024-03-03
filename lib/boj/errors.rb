@@ -2,5 +2,4 @@
 
 module Boj
   class BojError < StandardError; end
-  
 end

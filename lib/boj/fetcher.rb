@@ -11,19 +11,17 @@ module Boj
       uri = URI(BOJ_HOST)
       uri.path = "/problem/#{code}"
       begin
-        return Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+        Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
           request = Net::HTTP::Get.new uri
           request['user-agent'] = nil
 
           response = http.request request
-          if !response.is_a? Net::HTTPOK 
-            throw WrongResponseError.new(response.code, response.message)
-          end
+          throw WrongResponseError.new(response.code, response.message) unless response.is_a? Net::HTTPOK
 
           response.body
         end
-      rescue SocketError => exception
-        throw NetworkError exception
+      rescue SocketError => e
+        throw NetworkError e
       end
     end
 
