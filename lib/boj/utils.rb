@@ -11,7 +11,7 @@ module Boj
     #
     # 정규화된 스트링을 반환함
     def normalize_newline(str)
-      str.gsub(/\r\n|\n/, $RS)
+      str.gsub(/\r\n|\n/, $/)
     end
   end
 end
