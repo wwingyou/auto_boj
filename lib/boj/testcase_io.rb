@@ -3,15 +3,15 @@
 module Boj
   class TestcaseIO
     attr_reader :file_path, :input_prefix, :output_prefix, :name_format,
-      :input_prefix_match, :output_prefix_match
+                :input_prefix_match, :output_prefix_match
 
     def initialize(path = nil)
-      path ||= Boj.config["stage_path"]
-      testcase_config = Boj.config["testcase"]
-      @file_path = "#{path}/#{testcase_config["default_file_name"]}"
-      @input_prefix = testcase_config["input_prefix"]
-      @output_prefix = testcase_config["output_prefix"]
-      @name_format = testcase_config["default_name_format"]
+      path ||= Boj.config['stage_path']
+      testcase_config = Boj.config['testcase']
+      @file_path = "#{path}/#{testcase_config['default_file_name']}"
+      @input_prefix = testcase_config['input_prefix']
+      @output_prefix = testcase_config['output_prefix']
+      @name_format = testcase_config['default_name_format']
       @input_prefix_match = Regexp.new("^#{input_prefix}(.*)$")
       @output_prefix_match = Regexp.new("^#{output_prefix}\\s*$")
     end
@@ -22,7 +22,7 @@ module Boj
           (0...testcase.size).each do |index|
             file.puts "#{input_prefix}#{testcase[index].tag}"
             file.puts testcase[index].input
-            file.puts output_prefix 
+            file.puts output_prefix
             file.puts testcase[index].output
           end
         end
@@ -31,51 +31,53 @@ module Boj
 
     def read
       result = []
-      handle_file_error(file_path) do 
+      handle_file_error(file_path) do
         File.open(file_path, 'r') do |file|
-          tag, input, output = nil, nil, nil
+          tag = nil
+          input = nil
+          output = nil
           begin
             # 첫 번째 헤더 찾기
-            while file.readline !~ input_prefix_match 
+            while file.readline !~ input_prefix_match
             end
             while true
-              tag = $1.strip
+              tag = ::Regexp.last_match(1).strip
               # 인풋 읽기
-              input = ""
+              input = ''
               while line = file.readline
                 break if line =~ output_prefix_match
+
                 input += line
               end
               # 아웃풋 읽기
-              output = ""
+              output = ''
               while line = file.readline
                 break if line =~ input_prefix_match
+
                 output += line
               end
               result << Testcase.new(tag, input, output)
             end
           rescue EOFError
             if !tag.nil? and !input.nil? and !output.nil?
-              result << Testcase.new(tag, input, output)       
+              result << Testcase.new(tag, input, output)
             elsif !(tag.nil? and input.nil? and output.nil?)
               throw InvalidFormatError.new(file_path)
             end
           end
         end
       end
-      return result
+      result
     end
 
-  private
+    private
 
     def handle_file_error(file_path, &block)
-      begin
-        block.call if block_given?
-      rescue Errno::ENOENT
-        throw NoFileError.new(file_path)
-      rescue Errno::EACCES
-        throw FileAccessError.new(file_path)
-      end
+      block.call if block_given?
+    rescue Errno::ENOENT
+      throw NoFileError.new(file_path)
+    rescue Errno::EACCES
+      throw FileAccessError.new(file_path)
     end
 
     # ====================================
@@ -83,9 +85,10 @@ module Boj
     # ====================================
     class TestcaseIOError < StandardError
       attr_reader :file_path
+
       def initialize(file_path)
         @file_path = file_path
-        super set_message 
+        super set_message
       end
 
       def set_message

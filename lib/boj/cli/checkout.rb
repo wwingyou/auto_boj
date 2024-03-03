@@ -15,5 +15,4 @@ module Boj
       puts "다른 문제로 전환되었습니다.\n#{new_session}"
     end
   end
-  
 end

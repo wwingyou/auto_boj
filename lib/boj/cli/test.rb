@@ -9,7 +9,7 @@ module Boj
     end
 
     def run
-      testcases = Boj::TestcaseIO.new.read 
+      testcases = Boj::TestcaseIO.new.read
       threads = Boj::TestcaseRunner.batch testcases
 
       threads.each do |thread|
@@ -25,5 +25,4 @@ module Boj
       end
     end
   end
-  
 end

@@ -5,12 +5,11 @@ module Boj
     attr_reader :options
 
     def initialize(options)
-      @options = options     
+      @options = options
     end
 
     def run
       puts Boj.session
     end
   end
-  
 end

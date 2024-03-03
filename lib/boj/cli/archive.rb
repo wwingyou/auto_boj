@@ -4,7 +4,7 @@ module Boj
   class CLI::Archive
     attr_reader :options
 
-    def initialize(options)
+    def initialize(_options)
       @options = :options
     end
 
@@ -12,5 +12,4 @@ module Boj
       Boj::Archiver.archive
     end
   end
-  
 end

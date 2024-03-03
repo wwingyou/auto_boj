@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "./domain.rb"
-require_relative "./testcase_io.rb"
+require_relative './domain'
+require_relative './testcase_io'
 
 module Boj
   module ProblemIO
-    FILE_NAME = ".meta"
+    FILE_NAME = '.meta'
 
     def self.write(problem)
       File.open(FILE_NAME, 'w') do |file|

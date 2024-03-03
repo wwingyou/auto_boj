@@ -10,10 +10,10 @@ module Boj
 
     def run
       if Helper.initialized?
-        puts "이미 초기화된 디렉토리입니다." 
+        puts '이미 초기화된 디렉토리입니다.'
       else
         Helper.initialize_dir Dir.pwd
-        puts "현재 디렉토리를 초기화했습니다."
+        puts '현재 디렉토리를 초기화했습니다.'
       end
     end
   end

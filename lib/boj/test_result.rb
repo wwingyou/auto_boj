@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Boj
-  class TestResult 
+  class TestResult
     attr_reader :testcase, :status, :output, :error, :time
 
     def initialize(testcase, status, output, error, time)
@@ -17,7 +17,7 @@ module Boj
     end
 
     def to_s
-      self.inspect
+      inspect
     end
   end
 end
