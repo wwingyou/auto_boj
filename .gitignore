@@ -1,4 +1,8 @@
 .session
+.meta
 .ruby-lsp
 archive
 stage
+
+!spec/_source/.session
+!spec/_source/.meta
