@@ -15,8 +15,8 @@ RSpec.describe Boj::Utils do
       end
     end
 
-    context '$/ is \\r\\r' do
-      it 'normalize \\n to \\r\\n in string when $/ is \\r\\n' do
+    context '$/ is \\r\\n' do
+      it 'normalize \\n to \\r\\n in text' do
         $/ = "\r\n"
         text = "Lorem ipsum dolor sit amet, \nqui minim labore adipisicing \nminim sint cillum sint \nconsectetur cupidatat."
         normalized = "Lorem ipsum dolor sit amet, \r\nqui minim labore adipisicing \r\nminim sint cillum sint \r\nconsectetur cupidatat."
