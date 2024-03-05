@@ -33,8 +33,7 @@ module Boj
     end
 
     def to_s
-      # TODO: to_s 구현
-      ''
+      "<Session: #{pcode}, #{language}, #{tag}, #{status}>"
     end
   end
 end
