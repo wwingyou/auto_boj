@@ -1,48 +1,40 @@
 # frozen_string_literal: true
 
 module Boj
-  class Session < Hash
-    attr_reader :problem, :language, :tag
+  # 현재 풀이중인 문제에 대한 정보를 담는 클래스이다.
+  # 반드시 싱글톤으로 사용될 필요는 없으나, 루트 모듈등에서 하나의
+  # 오브젝트만 유지하는 용도로 설계되었다.
+  class Session
+    attr_reader :pcode, :language, :tag, :status
 
-    def initialize
-      @problem = Boj::Problem.load
-      if File.exist?('.session')
-        File.open('.session', 'r') do |file|
-          @language = file.readline.chomp.strip
-          @tag = file.readline.chomp.strip
-        end
-      elsif @language = Boj.config['default_language']
-        @tag = Boj.config['default_tag']
-      end
+    def initialize(pcode, language, tag, status)
+      @pcode = pcode
+      @language = language
+      @tag = tag
+      @status = status
     end
 
-    def save
-      File.open('.session', 'w') do |file|
-        file.puts language
-        file.puts tag
-      end
+    def serialize
+      [pcode, language, tag, status.to_s].join("\n")
     end
 
-    # FIXME: 필요없는 코드가 될것 같다
-    def checkout(args = {})
-      language = args[:language] || @language
-      tag = args[:tag] || @tag
-
-      Session.new
+    def self.deserialize(source)
+      props = source.lines.map(&:chomp)
+      Session.new(props[0], props[1], props[2], props[3].to_sym)
     end
 
     def ==(other)
       return false if other.class != Session
 
-      code == other.code and language == other.language and tag == other.tag
+      pcode == other.pcode &&
+        language == other.language &&
+        tag == other.tag &&
+        status == other.status
     end
 
     def to_s
-      if problem.nil?
-        "가져온 문제가 없습니다. \n'boj pull <code>'를 이용해 문제를 가져오세요."
-      else
-        "\t문제: #{problem}\n\t언어: #{language}\n\t태그: #{tag}"
-      end
+      # TODO: to_s 구현
+      ''
     end
   end
 end
