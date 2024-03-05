@@ -12,7 +12,7 @@ RSpec.describe Boj::Session do
   s5 = Boj::Session.new('1000', 'java', 'dijkstra', :not_started).freeze
   s6 = Boj::Session.new('1000', 'java', 'solution', :success).freeze
 
-  describe '#deserialize' do
+  describe '::deserialize' do
     it 'deserialize self from .session file' do
       session = Boj::Session.deserialize(serialized_text)
       expect(session.pcode).to eq('1000')
