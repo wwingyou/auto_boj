@@ -38,7 +38,7 @@ RSpec.describe Boj::Testcase do
 
   describe '#to_str' do
     it 'testcase to str' do
-      expect(t1.to_s).to eq('<Testcase: testcase1>')
+      expect(t1.to_s).to eq('<Testcase: 테스트1>')
     end
   end
 end
