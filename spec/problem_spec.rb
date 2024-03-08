@@ -24,11 +24,11 @@ RSpec.describe Boj::Problem do
     success: '410178',
     solver: '283141'
   }.freeze
-  p1 = Boj::Problem.new(1000, 'A+B', etc).freeze
-  p2 = Boj::Problem.new(1000, 'A+B', etc).freeze
-  p3 = Boj::Problem.new(1001, 'A+B', etc).freeze
-  p4 = Boj::Problem.new(1000, 'A-B', etc).freeze
-  p5 = Boj::Problem.new(1000, 'A+B', {}).freeze
+  p1 = Boj::Problem.new('1000', 'A+B', etc).freeze
+  p2 = Boj::Problem.new('1000', 'A+B', etc).freeze
+  p3 = Boj::Problem.new('1001', 'A+B', etc).freeze
+  p4 = Boj::Problem.new('1000', 'A-B', etc).freeze
+  p5 = Boj::Problem.new('1000', 'A+B', {}).freeze
 
   describe '::deserialize' do
     it 'deserialize self from string' do
