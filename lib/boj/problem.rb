@@ -1,46 +1,47 @@
 # frozen_string_literal: true
 
 module Boj
+  # 문제의 정보를 담는 데이터모델.
+  # .meta파일에 직렬화한 정보를 저장한다.
   class Problem
-    attr_reader :code, :title, :description, :testcases
+    attr_reader :code, :title, :etc
 
-    class << self
-      def load(path = nil)
-        path ||= Boj.config['stage_path']
-        return unless File.exist?("#{path}/.meta")
-
-        code = nil, title = nil, description = nil
-        # 메타데이터 가져오기
-        File.open("#{path}/.meta", 'r') do |file|
-          code = file.readline.chomp.strip
-          title = file.readline.chomp.strip
-          description = file.readline.chomp.strip
-        end
-        testcases = Boj::TestcaseIO.new(path).read
-
-        Boj::Problem.new(code, title, description, testcases)
-      end
-    end
-
-    def initialize(code, title, description, testcases)
+    def initialize(code, title, etc = {})
       @code = code
       @title = title
-      @description = description
-      @testcases = testcases
+      @etc = etc
     end
 
-    def write(path = nil)
-      path ||= Boj.config['stage_path']
-      File.open("#{path}/.meta", 'w') do |file|
-        file.puts code
-        file.puts title
-        file.puts description
+    class << self
+      def deserialize(source)
+        props = source.lines.map(&:chomp)
+        etc = {
+          tier: props[2],
+          time_limit: props[3],
+          memory_limit: props[4],
+          success_ratio: props[5],
+          submission: props[6],
+          success: props[7],
+          solver: props[8]
+        }
+        Problem.new(props[0], props[1], etc)
       end
-      Boj::TestcaseIO.new(path).write testcases
+    end
+
+    def serialize
+      [
+        code, title,
+        etc[:tier], etc[:time_limit], etc[:memory_limit],
+        etc[:success_ratio], etc[:submission], etc[:success], etc[:solver]
+      ].join("\n")
+    end
+
+    def ==(other)
+      code == other.code && title == other.title && etc == other.etc
     end
 
     def inspect
-      "<Problem #{code}:#{title}>"
+      "<Problem: #{code}, #{title}>"
     end
 
     def to_s
