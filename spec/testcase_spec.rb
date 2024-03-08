@@ -4,26 +4,24 @@ require 'boj/testcase'
 require 'spec_helper'
 
 RSpec.describe Boj::Testcase do
-  t1_fp = File.expand_path('_source/testcase/t1.txt', __dir__)
+  serialized_text = <<~TEST
+    ==테스트1
+    1 2
+    =>
+    3
+  TEST
   t1 = Boj::Testcase.new('테스트1', '1 2', '3')
   t2 = Boj::Testcase.new('테스트1', '1 2', '3')
 
   describe '#serialize' do
     it 'serialize testcase' do
-      serialized_text = <<~TEST
-        ==테스트1
-        1 2
-        =>
-        3
-      TEST
       expect(t1.serialize).to eq(serialized_text.chomp)
     end
   end
 
   describe '::deserialize' do
     it 'deserialize testcase' do
-      source = File.read(t1_fp)
-      deserialized_testcase = Boj::Testcase.deserialize(source)
+      deserialized_testcase = Boj::Testcase.deserialize(serialized_text)
       expect(deserialized_testcase.tag).to eq('테스트1')
       expect(deserialized_testcase.input).to eq('1 2')
       expect(deserialized_testcase.output).to eq('3')
