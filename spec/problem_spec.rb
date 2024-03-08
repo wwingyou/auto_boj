@@ -38,7 +38,7 @@ RSpec.describe Boj::Problem do
       expect(problem.etc[:tier]).to eq('Bronze 5')
       expect(problem.etc[:time_limit]).to eq('2 초')
       expect(problem.etc[:memory_limit]).to eq('128 MB')
-      expect(problem.etc[:success_ratio]).to eq('39.319% 5')
+      expect(problem.etc[:success_ratio]).to eq('39.319%')
       expect(problem.etc[:submission]).to eq('1036463')
       expect(problem.etc[:success]).to eq('410178')
       expect(problem.etc[:solver]).to eq('283147')
