@@ -4,7 +4,12 @@ require 'boj/session'
 require 'spec_helper'
 
 RSpec.describe Boj::Session do
-  serialized_text = File.read(File.expand_path('_source/.session', __dir__))
+  serialized_text = <<~TEXT
+    1000
+    java
+    solution
+    not_started
+  TEXT
   s1 = Boj::Session.new('1000', 'java', 'solution', :not_started).freeze
   s2 = Boj::Session.new('1000', 'java', 'solution', :not_started).freeze
   s3 = Boj::Session.new('2000', 'java', 'solution', :not_started).freeze
@@ -24,12 +29,6 @@ RSpec.describe Boj::Session do
 
   describe '#serialize' do
     it 'serialize self to string' do
-      serialized_text = <<~TEXT
-        1000
-        java
-        solution
-        not_started
-      TEXT
       expect(s1.serialize).to eq(serialized_text.chomp)
     end
   end
