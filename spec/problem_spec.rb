@@ -22,7 +22,7 @@ RSpec.describe Boj::Problem do
     success_ratio: '39.319%',
     submission: '1036463',
     success: '410178',
-    solver: '283141'
+    solver: '283147'
   }.freeze
   p1 = Boj::Problem.new('1000', 'A+B', etc).freeze
   p2 = Boj::Problem.new('1000', 'A+B', etc).freeze
