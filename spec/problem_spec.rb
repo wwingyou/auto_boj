@@ -56,7 +56,7 @@ RSpec.describe Boj::Problem do
       expect(p1).to eq(p2)
     end
 
-    it 'not equals to other session at least one props mismatch' do
+    it 'not equals to other problem at least one props mismatch' do
       expect(p1).not_to eq(p3)
       expect(p1).not_to eq(p4)
       expect(p1).not_to eq(p5)
@@ -64,7 +64,7 @@ RSpec.describe Boj::Problem do
   end
 
   describe '#to_s' do
-    it 'session to str' do
+    it 'problem to str' do
       str = '<Problem: 1000, A+B>'
       expect(p1.to_s).to eq(str)
     end
