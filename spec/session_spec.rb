@@ -18,7 +18,6 @@ RSpec.describe Boj::Session do
   diff4 = Boj::Session.new('1000', 'java', 'solution', :success).freeze
 
   it_behaves_like('serializable',
-                  Boj::Session,
                   obj,
                   source,
                   same,

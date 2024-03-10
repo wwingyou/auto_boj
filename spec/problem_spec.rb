@@ -31,7 +31,6 @@ RSpec.describe Boj::Problem do
   diff3 = Boj::Problem.new('1000', 'A+B', {}).freeze
 
   it_behaves_like('serializable',
-                  Boj::Problem,
                   obj,
                   source,
                   same,

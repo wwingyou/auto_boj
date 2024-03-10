@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'serializable' do |clazz, obj, source, same, different, str|
+RSpec.shared_examples 'serializable' do |obj, source, same, different, str|
   describe '#serialize' do
     it 'serialize self to string' do
       expect(obj.serialize).to eq(source.chomp)
@@ -9,7 +9,7 @@ RSpec.shared_examples 'serializable' do |clazz, obj, source, same, different, st
 
   describe '::deserialize' do
     it 'deserialize source to object' do
-      expect(clazz.deserialize(source)).to eq(obj)
+      expect(described_class.deserialize(source)).to eq(obj)
     end
   end
 

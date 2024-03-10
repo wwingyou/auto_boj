@@ -17,7 +17,6 @@ RSpec.describe Boj::Testcase do
   diff3 = Boj::Testcase.new('테스트1', '1 2', '9')
 
   it_behaves_like('serializable',
-                  Boj::Testcase,
                   obj,
                   source,
                   same,
