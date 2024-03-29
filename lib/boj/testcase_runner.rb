@@ -21,6 +21,7 @@ module Boj
             pid = t.pid
             start = Time.now
             i.puts testcase.input
+            i.close
             # 프로세스가 종료될 때까지 기다리기
             result = t.value
 
